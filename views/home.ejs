@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Irrigation System</title>
+    <link rel="stylesheet" href="home.css" type="text/css">
+</head>
+<body>
+
+    <!--   start of navigation bar   -->
+    <nav class="navbar">
+        <div id="logo">
+            <img src="">
+        </div>
+
+        <div id="title">
+           <h1 id="title">Automated Irrigation System</h1>
+        </div>
+
+        <div id="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+
+    </nav>
+    <!--  end of navigation bar -->
+    
+            <!-- start of the section one -->
+            <div  class="dashboard">
+                
+                <div class="dashboard-left">
+
+                    <div class="logo">
+                       <img src="photos/dashboard.jpeg"alt="dashboard img">
+                    </div>
+
+                    <div class="title">
+                        <h1 class="big-text">DASHBOARD</h1>
+                        <p class="small-text">FARMER'S AREA</p>
+                    </div>
+                    
+                </div>
+                
+
+                <div class="dashboard-right">
+                    <div class="sale">
+                        <div class="heading">
+                          <h4>Type of Crop</h4>
+                          <i class="searchIcon">🔍</i>
+                        </div>
+                        <div class="items">
+                    <form action="#">
+                        <input type="text" name="crop" placeholder="enter crop nothing" id="crop">
+                        <input type="submit" value="submit" id="plantBtn">
+                    </form>
+
+                        </div>
+
+                    </div>
+
+                    <div class="payment">
+
+                        <div class="heading">
+                            <h4>Weather</h4>
+                            <i class="searchIcon"></i>
+                          </div>
+                          <div class="items">
+                              <div class="item">Today</div>
+                              <div class="item">Tomorrow</div>
+                          </div>
+                    </div>
+
+                    <div class="profile" id="profile">
+                        <img src="./photos/profile-pic.png" alt="profile photo">
+                    </div>
+                        <!-- <h1>welcome data.name </h1> -->
+                </div>
+
+            </div>
+        <!-- end of section one -->
+        <div class="grid-container">
+            
+            <div class="item2">
+                <div class="notification-box">
+                    <a href="#" class="notification">
+                        <span>inbox</span>
+                        <span class="badge">2</span>
+                      </a>
+                </div>
+
+                <div class="left-bar1">
+                    <div class="year-title">
+                        <h4>Modes</h4>
+                        <div class="positive"></div>
+                        <div class="negative"></div>
+                      </div>
+
+                      <div class="years">
+                        <div class="status"></div>
+                        <div class="year1"></div>
+                      </div>
+
+                </div>
+
+                <div class="left-bar2">
+
+                    <div class="year-title">
+                        <h3>Notification</h3>
+                        <i class="searchIcon">🔍</i>
+                      </div>
+
+                      <div class="items">
+                        <div class="item">employee mode</div>
+                        <div class="item">admin mode</div>
+                        <div class="item">Time of irrigation</div>
+
+                      </div>
+
+                </div>
+
+            </div>
+            <div class="center-bar">
+                    <div class="center-up">
+           
+                        <div class="center-bar1">
+                               <small>Temperature</small>
+                               <div class="item">
+                                  <span id="temp">0</span>
+                               </div>
+                        </div>
+           
+                        <div class="center-bar1">
+           
+                            <small>Humidity</small>
+                            <div class="item">
+                               <span id="humid">0</span>
+                            </div>
+                        </div>
+           
+                        <div class="center-bar1">
+                            <small>Soil-moisture</small>
+                           
+                            <div class="item">
+                               <span id="soilMoisture">0</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="center-center">
+                        <div class="item1">
+                            <div class="heading">
+                                <img src="photos/averageWater.jpeg">
+                                <small>Amount of water needed</small>
+                            </div>
+    
+                            <div class="content">
+                                <span id="avg-rain">0</span>
+                                
+                            </div>
+    
+    
+                        </div> 
+    
+                        <div class="item1">
+                            <div class="heading">
+                                <img src="photos/temp.png">
+                                <small>Average Temperature</small>
+                            </div>
+    
+                            <div class="content">
+    
+                                <span id="avg-temp">0</span>
+                                
+                            </div>
+    
+    
+                        </div>
+    
+                        <div class="item1">
+                            <div class="heading">
+                                <img src="photos/soilMoisture.png">
+                                <small>average soil-moisture</small>
+                            </div>
+                            <div class="content">
+                                <span id="avg-soilMoisture">250mm</span>
+                                
+                            </div>
+    
+    
+                        </div>
+                    </div>
+    
+                    <div class="center-down">
+                                    <!-- Slideshow container -->
+                                     <div class="slideshow-container fade">
+    
+                                       
+                                        <div class="Containers">
+                                        
+                                        <img src="photos/agr1.jpeg" id="slide-image">
+                                         
+                                        <a class="Back" onclick="plusSlides(-1)">&#10094;</a>
+                                        <a class="forward" onclick="plusSlides(1)">&#10095;</a>
+                                    <br>         
+                                    <div style="text-align:center">
+                                        <span class="dots" onclick="currentSlide(1)"></span>
+                                        <span class="dots" onclick="currentSlide(2)"></span>
+                                        <span class="dots" onclick="currentSlide(3)"></span>
+                                    </div> 
+                                        </div>
+    
+                                        <div class="Containers">                 
+                                        <img src="photos/agri2.jpg" id="slide-image">                                    
+                                        </div>
+    
+                                        <div class="Containers">
+                                        <img src="photos/agri3.jpeg" id="slide-image">
+                                        </div> 
+                                    </div>  
+    
+                
+                </div>
+            </div>
+              
+
+            <div id="right-bar">
+            
+                <div class="item1">                     
+                        <h6>Favorable-conditions</h6>
+                         <div class="crop-conditions">
+                            <h3>crop name<span id="name"></span></h3>
+                            <ul>
+                            <li> crop temperature <span id="temperature"></span></li>
+                            <li> crop rainfall <span id="rainfall"></span></li>
+                            <li> crop soil moisture <span id="soilMoisture"></span></li>
+                            </ul>
+                         </div>
+                </div>
+
+                <div class="item2">                       
+                        <h3>Geographic Location</h3>
+                        <div id="map"></div>
+                </div>    
+
+            </div>
+          </div>
+        
+                <!-- end of the section -->
+        
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+        crossorigin=""/>
+
+         <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+ integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+ crossorigin=""></script>
+<script src="app.js"></script>
+</body>
+</html>

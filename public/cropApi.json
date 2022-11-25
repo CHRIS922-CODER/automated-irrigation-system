@@ -1,0 +1,24 @@
+[
+    {
+        "name":"maize",
+         "description":"",
+          "temperature":30,
+          "moisture":18.1,
+          "rain":1000
+
+    },
+    {
+        "name":"tomatoes",
+        "description":"",
+         "temperature":14,
+         "moisture":20,
+         "rain":600
+    },
+    {
+        "name":"beans",
+        "description":"",
+         "temperature":27,
+         "moisture":14,
+         "rain":500
+    }
+]

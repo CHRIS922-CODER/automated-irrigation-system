@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>REGISTER</title>
+        <link rel="stylesheet" type="text/css" href="register.css">
+        </head>
+        <body>
+                <div class="main">
+                        <div class="reg-form"><h1>Registration Form</h1></div>
+                        <form action="/register" method="POST">
+                        <div id="name">
+                                <h2 class="name">Name</h2>
+                                <input class="first-name" type="text" name="firstName" required><br>
+                                <label class="first-label">first name</label>
+                                <input class="last-name" type="text" name="lastName" required>
+                                <label class="first-label">last name</label>
+                        </div>
+                        <h2 class="name">Farm Size</h2>
+                        <input class="institution" type="text" name="farmSize">
+                        <h2 class="name" required>Email</h2>
+                        <input class="email" type="email" name="username">
+
+                        <h2 class="phone-number">Phone Number</h2>
+                        <input class="number" type="text" name="phoneNo" required>
+                        <h2 class="name">Password</h2>
+                        <input class="password" type="text" name="password" required>
+                        <h2 class="name">Type of crop</h2>
+                        <select  class="option" name="typeOfCrop">
+                                <option disabled="disabled" selected="selected">...choose option</option>
+                                <option value="maize">maize</option>
+                                <option value="tea">tea</option>
+                                <option value="coffee">coffee</option>
+                        </select>
+                        <input type="submit" value="submit">Submit</input>
+                </form>
+        </div>
+        </body>
+
+</html>
+
