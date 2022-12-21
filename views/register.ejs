@@ -6,6 +6,9 @@
         </head>
         <body>
                 <div class="main">
+                       <%    if(messages.length >0){%>
+                                <div alert alert-success><%= messages %> </div>
+                      <% }%>
                         <div class="reg-form"><h1>Registration Form</h1></div>
                         <form action="/register" method="POST">
                         <div id="name">
@@ -28,8 +31,8 @@
                         <select  class="option" name="typeOfCrop">
                                 <option disabled="disabled" selected="selected">...choose option</option>
                                 <option value="maize">maize</option>
-                                <option value="tea">tea</option>
-                                <option value="coffee">coffee</option>
+                                <option value="tomatoes">tomatoes</option>
+                                <option value="beans">beans</option>
                         </select>
                         <input type="submit" value="submit">Submit</input>
                 </form>

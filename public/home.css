@@ -33,23 +33,21 @@ body{
     border-radius:10px;
     justify-content:flex-start;
     margin-right:5rem;
+    margin-left:1rem;
+}
+.navbar #logo img{
+    width:3rem;
+    height:3rem;
+    border-radius:10px;
 }
 .navbar #title{
     font-size:2.5rem;
     padding:0 20px;
+    text-transform:uppercase;
+    margin:auto;
     
 }
-.navbar #nav-links{
-    display:flex;
-    column-gap:3rem;
-    margin-right:20px;
-    justify-content:flex-end;
-}
-.navbar #nav-links a{
-    text-decoration:none;
-    font-size:1.5rem;
-    color:antiquewhite;
-}
+
 
 .dashboard{
     display:flex;
@@ -118,7 +116,8 @@ body{
 
 .dashboard-right .sale .items,.dashboard-right .payment .items{
     display:flex;
-    align-items:center;
+    align-items: center;
+    justify-content:center;
 
 }
 .dashboard-right .sale .items form input[type="text"]{
@@ -165,6 +164,22 @@ body{
      width:3rem;
 }
 
+.popup{
+    width:10rem;
+    height:10px;
+    align-items:center;
+    justify-content:center;
+    display:flex;
+    
+}
+.popup a{
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+}
+.popup a:hover{
+    color:green;
+}
 
 .grid-container{
     display:grid;
@@ -184,115 +199,156 @@ body{
 .grid-container .item2{
     position:relative;
 }
-.notification {
-    background-color: rgb(80, 177, 77);
-    color: white;
-    text-decoration: none;
-    padding: 4px 7px;
-    position: absolute;
-    display: inline-block;
-    border-radius: 2px;
-    right:2px;
-    top:1px;
-    z-index: 2;
-  }
-  
-  .notification:hover {
-    background: green;
-  }
-  
-  .notification .badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    padding:4px;
-    border-radius: 80%;
-    background: red;
-    color: white;
-    font-size:1rem;
-  }
-  .notification-box{
-    background-color:rgb(74, 206, 74);
-    display:flex;
-    justify-content:space-between;
-    margin-top:0;
-  }
+
+
      
   .left-bar1{
     position:absolute;
-    top:0;
+    top: 1px;
     display:flex;
     flex-direction:column;
     background-color:#004225;
     border-radius:5px;
     padding-right:10px;
-    z-index: 1;
     width:100%;
+    gap:10px;
+    padding-bottom:10px;
 }
-.left-bar1 .year-title{
-    display:flex;
-    justify-content:space-between;
-}
-.left-bar1 .year-title .positive{
-    background-color:green;
-    width:0.5rem;
-    height:0.5rem;
-    border-radius:50%;
-}
-.left-bar1 .year-title .negative{
-    background-color:red;
-    width:0.5rem;
-    height:0.5rem;
-    border-radius:50%;
-}
-.left-bar1 .years{
+.left-bar1{
     display:flex;
     flex-direction:column;
-    margin:10px;
-}
-.left-bar1 .years .year,.left-bar1 .years .year1{
-    background-color:rgba(97, 218, 81, 0.1);
+    gap:10px;
+    width:100%;
+    justify-content:center;
+    align-items:center;
     padding:10px;
-    margin:2px;
-    border-radius:4px;
-    font-size:15px;
-    padding-right:1rem;
-    justify-content:flex-start;
-    border:1px solid rgba(240, 15, 64, 0.8);
+
 }
-.left-bar .left-bar2{
-    border-radius:5px;
-    padding:10px;
-    margin-top:2rem;
+.left-bar1 .year{
+    display:flex;
     
 }
-.left-bar .left-bar2 .year-title{
-    display:flex;
-    justify-content:space-between;
+.left-bar1 p{
+    font-size:10px;
 }
-.left-bar .left-bar2 .items{
+.left-bar1 span{
+    font-weight:bold;
+    letter-spacing: 3px;
+}
+
+.left-bar1 .status{
+   width:100%;
+   height:1.5rem;
+   border-radius:8px;
+   border:1px solid aqua;
+   
+}
+
+.left-bar1 .years .state{
+    background-color:white;
+}
+
+.item2 .left-bar2{
+    position:absolute;
+    border-radius:5px;
+    padding:10px;
+    margin-top:1rem;
+    top:25%;
+    background-color:#00ff7f;
     display:flex;
     flex-direction:column;
-    margin:10px;
+    gap:1rem;    
 }
-
-.left-bar .left-bar2 .items .item{
-    background-color:rgba(240, 15, 64, 0.8);
+.item2 .left-bar2 .key1{
+    background-color:rgb(181, 213, 181);
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    height:2rem;
+    align-items:center;
     padding:5px;
-    margin:1px;
-    border-radius:4px;
-    font-size:15px;
-    padding-right:1rem;
-    justify-content:flex-start;
+    border-radius:10px;
+
 }
 
+.item2 .left-bar2 .key1 .positive{
+    width:50%;
+    height:1.5rem;
+    background-color:green;
+}
+.item2 .left-bar2 .key1 span{
+    font-size:10px;
+    color:green;
+    font-weight:bold;
+}
 
+.item2 .left-bar2 .key2{
+    background-color:rgb(181, 213, 181);
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    height:2rem;
+    align-items:center;
+    padding:5px;
+    border-radius:10px;
+
+}
+
+.item2 .left-bar2 .key2 .negative{
+    width:50%;
+    height:1.5rem;
+    background-color:red;
+}
+.item2 .left-bar2 .key2 span{
+    font-size:10px;
+    color:red;
+}
+
+.item2 .left-bar2 .key3,.item2 .left-bar2 .key4{
+    background-color:rgb(181, 213, 181);
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    height:3rem;
+    align-items:center;
+    padding:5px;
+    border-radius:10px;
+
+}
+.item2 .left-bar2 .key3 img,.item2 .left-bar2 .key4 img{
+    width:20%;
+    height:auto;
+}
+
+.item2 .left-bar2 .key3 span{
+    font-size:10px;
+    color:red;
+}
+
+.item2 .left-bar2 .key4 span{
+    font-size:10px;
+    color:green;
+}
+.item2 .left-bar2 .key5{
+    background-color:rgb(181, 213, 181);
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    height:5rem;
+    align-items:center;
+    padding:5px;
+    border-radius:10px;
+}
+
+.item2 .left-bar2 .key5 .image{
+    width:100%;
+    height:5rem;
+}
 .center-bar{
     display:flex;
     background-color:blue;
     border-radius:5px;
     flex-direction:column;
-    /* padding-top:1rem; */
     gap:0.5rem;
     height:90%;
     }
@@ -325,11 +381,11 @@ body{
         margin:10px;
        border:1px solid red;
        background-color:#004225;
-       padding:10px;
+       padding:15px;
        border-radius:5px;
        display:flex;
        flex-direction:column;
-       gap:1rem;
+       gap:0.5rem;
     }
     
     .center-bar .center-center .item1 .heading{
@@ -380,12 +436,15 @@ body{
         background-color:#177245; 
         height:10rem;
     }
+
+    h6{
+        font-size:15px;
+    }
     
     #map {
-         height: 19rem; 
+         height: 17rem; 
          width:auto;
         }   
-         /* display the corousel */
     
     
          /* Slideshow container */
@@ -400,16 +459,8 @@ body{
          /* Make the images invisible by default */
          .Containers {
             width:100%;    
-            /* .center-bar .center-down .item1{
-                background-color:#177245;
-                padding:10px;
-                width:100%;
-                border-radius:5px;
-                justify-content:center;
-                border:2px solid red;
-            } */
             height:100%;
-           display: none;
+           /* display: none; */
            border:2px solid black;
          }
      #slide-image{
@@ -446,20 +497,7 @@ body{
          
 
          
-        
-
-         
-         /* The circles or bullets and indicators */
-         .dots {
-           cursor: pointer;
-           height: 16px;
-           width: 16px;
-           margin: 0 3px;
-           background-color: #acc;
-           border-radius: 50%;
-           display: inline-block;
-           transition: background-color 0.5s ease;
-         }
+    
          
          .enable, .dots:hover {
            background-color: #717161;

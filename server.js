@@ -1,5 +1,5 @@
 const express = require('express');
-const PORT = 8010;
+const PORT = 8012;
 const app = express()
 const session = require('express-session')
 const path = require('path')
@@ -7,8 +7,10 @@ const passport = require('passport')
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const bodyParser= require('body-parser');
+const flash = require('express-flash');
 
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(flash())
 app.use(session({
     secret:'secret',
     resave:false,
@@ -23,7 +25,7 @@ app.use(passport.session());
 
 
 // Connect to MongoDB
-mongoose
+ mongoose
   .connect("mongodb://localhost:27017/autoDB",
     { useNewUrlParser: true ,useUnifiedTopology: true}
   )
@@ -41,39 +43,57 @@ app.use(express.static( path.join(__dirname ,'/public')))
 const userSchema = new mongoose.Schema({
 email:String,
 password:String
-    // firstName: {
-    //     type: String,
-    //     required: true
-    //   },
-    //   lastName: {
-    //     type: String,
-    //     required: true
-    //   },
-    //   farmSize: {
-    //     type: Number,
-    //     required: true
-    //   },
-    //   email: {
-    //     type: String,
-    //     required: true
-    //   },
-    //   password: {
-    //     type: String,
-    //     required: true
-    //   },
-    //   typeOfCrop: {
-    //     type: String,
-    //     required:false
-    //   }
+
+});
+const UserDetailSchema = new mongoose.Schema({
+  firstName:{
+    type:String,
+    required:true
+  },
+  lastName:{
+    type:String,
+    required:true,
+  },
+  farmSize:{
+    type:Number,
+    required:true
+  },
+  email:{
+    type:String,
+    required:true
+  },
+  phoneNumber:{
+    type:Number,
+    required:true,
+  },
+  typeOfCrop:{
+    type:String,
+    required:true,
+  }
+
+
 })
+
+var cropDataSchema = new mongoose.Schema({
+     name:{type: String},
+     description:{type: String},
+     temperature:{type: String},
+     moisture: {type: String},
+     rain:{type: String},
+
+  },{collection:'cropData'});
+
 
 // adding passport local mongoose plugin to our Schema
 
 userSchema.plugin(passportLocalMongoose);
 
+var Schema = mongoose.Schema;
 // creating the User model
+const User = new mongoose.model('User',userSchema); // for email and password
+const UserDetails = new mongoose.model('cropdatas',UserDetailSchema);// for farmer details
+const cropModel = mongoose.model('cropData',cropDataSchema);// connection to the existing data in the database
 
-const User = new mongoose.model('User',userSchema);
 
 passport.use(User.createStrategy());
 
@@ -87,33 +107,71 @@ passport.deserializeUser(User.deserializeUser());
 app.get("/login",(req,res)=>{
     if(req.isAuthenticated()){
         console.log("user already logged in and there is no need to login again");
-        res.render('home');
+        var username = req.body.username;
+        UserDetails.find({email:username},{_id:0,typeOfCrop:1},(err,data)=>{
+            console.log(data);
+            if(err)throw err;
+            console.log(data[0]);
+            var into = data[0].typeOfCrop;
+            console.log(into)
+           cropModel.find({name:into},{_id:0,temperature:1,moisture:1,rain:1,name:1},(err,data)=>{
+                if(err){
+                    return err;
+                }else{
+                    console.log(data[0]);
+                    res.render('home',{data:data[0]});
+                }
+           })
+        
+        })
+        //res.render('home');
+        
     }else{
         // is user is new and there is no session is running already
-        
-        res.render("login");
+        console.log("whenever one is not authenticated")
+        res.render("login",req.flash("message"));
     }
 })
 
-app.get('/',(req,res)=>{
+
+app.get('/', async(req,res)=>{ 
     if(req.isAuthenticated()){
         console.log("user already logged in");
-        res.render('home');
+
+        res.render('home');   
+        
     }else{
-        console.log("user not sign up");
-        res.redirect('/login')
+        console.log("user not sign up");           
+        res.render('login');
     }
-})
+
+});
 
 app.get('/register',(req,res)=>{
     res.render('register')
 })
-app.post('/register',(req,res)=>{
+
+app.post('/register',async (req,res)=>{
     console.log(req.body);
-    var email = req.body.username;
-    var password = req.body.password;
+    var userDetail = await new UserDetails({
+         email :req.body.username,
+         firstName :req.body.firstName,
+         lastName :req.body.lastName,
+         farmSize :req.body.farmSize,
+         typeOfCrop:req.body.typeOfCrop,
+         phoneNumber: req.body.phoneNo
+    })
+    userDetail.save()
+    .then(()=>{
+        console.log("user details saved successfully");
+    })
+    .catch(err => {
+        throw err;
+    });
 
 
+        var email = req.body.username;
+    
     User.register({username:email},req.body.password,(err,user)=>{
         if(err){
             console.log(err);
@@ -121,11 +179,15 @@ app.post('/register',(req,res)=>{
         }else{
             passport.authenticate('local')
             (req,res,function(){
-                res.render('home');
+                req.flash("registration Successful");
+                res.render('login');
             })
         }
     })
-})
+
+
+
+});
 
 // Handling the post request on /login routes
 
@@ -141,6 +203,7 @@ app.post("/login",(req,res)=>{
     req.login(userToBeChecked,(err)=>{
         if(err){
             console.log(err);
+            req.flash("message","Incorrect details");
             res.redirect('/');
         }else{
             passport.authenticate("local")
@@ -151,9 +214,24 @@ app.post("/login",(req,res)=>{
                         console.log(err);
                         throw err;
                     }else{
-                        // login is successful
-                        console.log('credentials are correct');
-                        res.render('home');
+
+                        var username = req.body.username;
+                        console.log(username)
+UserDetails.find({email:req.user.username},{_id:0,typeOfCrop:1},(err,data)=>{
+    if(err)throw err;
+    console.log(data[0]);
+    var into = data[0].typeOfCrop;
+    console.log(into)
+   cropModel.find({name:into},{_id:0,temperature:1,moisture:1,rain:1,name:1},(err,data)=>{
+        if(err){
+            return err;
+        }else{
+            console.log(data[0]);
+            res.render('home',{data:data[0]});
+        }
+   })
+
+})
                     }
                   });
             });

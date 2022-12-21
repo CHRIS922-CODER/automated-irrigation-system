@@ -5,13 +5,13 @@ const soilMoisture = document.getElementById('soilMoisture');
 const averageRain = document.getElementById('avg-rain');
 const averageTemp = document.getElementById('avg-temp');
 const averageSoilMoisture = document.getElementById('avg-soilMoisture');
-const state = document.querySelector('.year');
+const state = document.querySelector('.status');
 const expectedWater = document.querySelector('.year1');
 
 async function getApiData(url){
 	const response = await fetch(url);
 	const responseData = await response.json();
-      console.log(responseData);
+     // console.log(responseData);
 	showData(responseData);
   displayAverages(responseData.hourly.temperature_2m,responseData.hourly.rain,responseData.hourly.soil_moisture_9_27cm,responseData);
 }
@@ -39,8 +39,8 @@ let sum =0;
   array.forEach(item =>{
     sum +=item;
   });
-  console.log(sum);
-  return sum/array.length;
+  //console.log(sum);
+  return sum/array.length * 100;
 
 }
 	
@@ -80,127 +80,92 @@ alert("cannot get current location ");
 
 
 
-// const input = document.getElementById('crop').value;
-// // importing crop api
-// const cropApi = " "+input;
-// // const data = fetchCropApi(cropApi);
-// function fetchCropApi(url){
-// 	const response = fetch(url)
-// 	.then( res =>{
-// 		return res.json()
-// 	}).then(data =>{
-// 		return data;
-// 	}).catch(err =>{return err});
-// }
-// const container = document.querySelector('.crop-conditions');
 
-// function showContent(){
-// 	const list = container.createElement('div');
-// 	const res = fetchCropApi(cropApi)
-//    res.forEach((data)=>{
-// 	list.innerHTML =`
-// 	  <h3>crop name: ${data.cropName}</h3>
-// 	  <img src=${data.cropImage} alt="crop-image">
-// 	  <ul>
-// 	  <li>${data.cropTemp}</li>
-// 	  <li>${data.cropRainfall}</li>
-// 	  <li>${data.cropMoistureSupport}</li>
-// 	  <li><P>${data.cropDescription}</li>
-// 	  </ul>
-// 	           `;
+async function getApiData1(){
+	const response = await fetch(WEATHER_API_DATA);
+	const responseData = await response.json();
 
-//    });
-//    container.appendChild(list);
+   var rain = calculateAverages(responseData.hourly.rain);
+   var moisture = calculateAverages(responseData.hourly.soil_moisture_9_27cm);
+   localStorage.setItem('rain',`${rain}`);
+   localStorage.setItem('soilMoisture',`${moisture}`);
+   //console.log(rain,moisture);
+  //generateIrrigationStatus(results) 
+}
+getApiData1();
 
-// }
-// showContent();
 
- 
+function determineToIrrigateOrNot() {
 
-// function to determine if to irrigate or not by getting the averages
-
-function determineToIrrigateOrNot(averageRain,averageSoilMoisture,averageCropRain,averageCropSoilMoisture) {
+  const averageCropRain = document.getElementById('rainfall').textContent;
+  const averageCropSoilMoisture = Math.trunc(document.getElementById('soil-moisture').textContent);
+  const averageRain = localStorage.getItem('rain');
+  const averageSoilMoisture = Math.trunc(localStorage.getItem('soilMoisture'));
+  console.log(averageCropRain,averageCropSoilMoisture);
+  console.log(averageRain,averageSoilMoisture);
 let status = true;
 let expectedWaterToIrrigate = 0 + " mm";
-  if(averageRain == 0 && averageCropRain < averageCropRain && averageSoilMoisture < averageCropSoilMoisture){
+let result = []
+  if(averageRain == 0 && averageRain < averageCropRain && averageSoilMoisture < averageCropSoilMoisture){
     status = true;
     expectedWaterToIrrigate = averageCropRain -averageRain;
+    console.log('1')
+  result = [status, expectedWaterToIrrigate]
 
-    console.log('its ')
-    return {
-      'status':status,
-      'expectedWaterToIrrigate':expectedWaterToIrrigate
-    }
-  }else if(averageRain > 0 && averageRain < averageCropRain && averageSoilMoisture < averageCropSoilMoisture){
+  }else if(averageRain == 0  && averageRain < averageCropRain && averageSoilMoisture < averageCropSoilMoisture){
     status = true;
     expectedWaterToIrrigate = averageCropRain -averageRain;
-    return {
-      'status':status,
-      'expectedWaterToIrrigate':expectedWaterToIrrigate
-    }
-  }else if(averageRain > 0 && averageRain < averageCropRain && averageSoilMoisture >= averageCropSoilMoisture){
+    console.log('2')
+
+  result = [status, expectedWaterToIrrigate];
+
+  }else if(averageRain == 0  && averageRain < averageCropRain && averageSoilMoisture >= averageCropSoilMoisture){
     status = false;
     expectedWaterToIrrigate = 0 + "mm";
+    console.log('3')
 
-    return {
-      'status':status,
-      'expectedWaterToIrrigate':expectedWaterToIrrigate
-    }
-  }else if(averageRain > 0 && averageRain > averageCropRain && averageSoilMoisture < averageCropSoilMoisture){
+   result = [status, expectedWaterToIrrigate];
+
+  }else if(averageRain == 0  && averageRain > averageCropRain && averageSoilMoisture < averageCropSoilMoisture){
     status = false;
     expectedWaterToIrrigate = averageCropRain -averageRain;
+    console.log('4')
+    
+    result =  [status, expectedWaterToIrrigate];
 
-    return {
-      'status':status,
-      'expectedWaterToIrrigate':expectedWaterToIrrigate
-    }
-
-  }else if(averageRain > 0 && averageRain < averageCropRain && averageSoilMoisture > averageCropSoilMoisture){
+  }else if(averageRain == 0  && averageRain < averageCropRain && averageSoilMoisture > averageCropSoilMoisture){
     status = false;
     expectedWaterToIrrigate = -averageRain -averageCropRain ;
-    console.log("overflow");
+    console.log('5')
 
-    return {
-      'status':status,
-      'expectedWaterToIrrigate':expectedWaterToIrrigate
-    }
+
+   result = [status, expectedWaterToIrrigate];
+    
   }
-
+  return result;
+  
 }
-
-function generateIrrigationStatus(determineToIrrigateOrNot){
-  let status = determineToIrrigateOrNot.status;
-  let waterNeeded = determineToIrrigateOrNot.expectedWaterToIrrigate;
-
+var results = determineToIrrigateOrNot();
+console.log(results);
+generateIrrigationStatus(results);
+function generateIrrigationStatus(results){
+  let status = results[0];
+  let waterNeeded = results[1];
+   console.log(status,waterNeeded);
 
   if(status){
+    console.log(" irrigate");
     state.style.backgroundColor = 'green';
     expectedWater.innerText = waterNeeded;
     
   }else{
+    console.log("don't irrigate");
     state.style.backgroundColor = 'red';
     expectedWater.innerText = waterNeeded;
+   
   }
 }
-
-// logical
-// check the weather forecast and see if there is presence of raining in the day and by how much
-
-
-// check the current soil moisture content of the area and see if
-
-// The amount of water to irrigate randomly is determined
-
-// Calculate if the soil moisture content is above the thresh-hold and can sustain the plant during the whole day then save water for the plant
-
-// Check the weather forecast if there is to expect rain of certain mm which is above the thresh-hold then save the water for the plant
-
-// check the amount of evapotranspiration content if it will be low during the day then save the water for the plant
-
-// combine the  condition to find if its suitable to irrigate then show a notification button to show weather to irrigate or not
-
- 
-// handling the corousel
+//generateIrrigationStatus();
 
 
 var slidePosition = 1;

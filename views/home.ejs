@@ -12,20 +12,12 @@
     <!--   start of navigation bar   -->
     <nav class="navbar">
         <div id="logo">
-            <img src="">
+            <img src="photos/agri5.jpeg">
         </div>
 
         <div id="title">
            <h1 id="title">Automated Irrigation System</h1>
         </div>
-
-        <div id="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-        </div>
-
     </nav>
     <!--  end of navigation bar -->
     
@@ -49,15 +41,8 @@
                 <div class="dashboard-right">
                     <div class="sale">
                         <div class="heading">
-                          <h4>Type of Crop</h4>
-                          <i class="searchIcon">🔍</i>
-                        </div>
-                        <div class="items">
-                    <form action="#">
-                        <input type="text" name="crop" placeholder="enter crop nothing" id="crop">
-                        <input type="submit" value="submit" id="plantBtn">
-                    </form>
-
+                          <h4>Irrigation The Key To Crop Survival</h4>
+                          
                         </div>
 
                     </div>
@@ -65,17 +50,21 @@
                     <div class="payment">
 
                         <div class="heading">
-                            <h4>Weather</h4>
+                            <h4>Weather updates</h4>
                             <i class="searchIcon"></i>
                           </div>
                           <div class="items">
-                              <div class="item">Today</div>
-                              <div class="item">Tomorrow</div>
+                              <div class="item">Daily</div>
+                              <div class="item">Hourly</div>
                           </div>
                     </div>
 
                     <div class="profile" id="profile">
-                        <img src="./photos/profile-pic.png" alt="profile photo">
+                        <img src="./photos/profile.jpeg" alt="profile photo">
+                    </div>
+
+                    <div class="popup">
+                        <a href="/logout">Logout</a>
                     </div>
                         <!-- <h1>welcome data.name </h1> -->
                 </div>
@@ -85,44 +74,51 @@
         <div class="grid-container">
             
             <div class="item2">
-                <div class="notification-box">
-                    <a href="#" class="notification">
-                        <span>inbox</span>
-                        <span class="badge">2</span>
-                      </a>
-                </div>
 
                 <div class="left-bar1">
-                    <div class="year-title">
-                        <h4>Modes</h4>
-                        <div class="positive"></div>
-                        <div class="negative"></div>
-                      </div>
-
-                      <div class="years">
-                        <div class="status"></div>
-                        <div class="year1"></div>
-                      </div>
+                    <h4>Modes</h4>
+                      
+                        
+                        <div class="year">
+                            <p>Expected Water</p>
+                            <span class=".year1"></span>
+                        </div>
+                        
+                        <div class="status">
+                            
+                        </div>
+                      
 
                 </div>
 
                 <div class="left-bar2">
 
-                    <div class="year-title">
-                        <h3>Notification</h3>
-                        <i class="searchIcon">🔍</i>
+                    <div class="key1">                       
+                        <div class="positive"></div>
+                        <span>IRRIGATE</span>
+                      </div>
+                      <div class="key2">
+                        <div class="negative"></div>
+                         <span>DO NOT IRRIGATE</span>
+                      </div>
+                      <div class="key3">
+                        <img src="./photos/highTemp.png"alt="">
+                        <span>High temperatures(above 30 deg)</span>
+                      </div>
+                      <div class="key4">
+                        <img src="./photos/lowTemp.png"alt="">
+                        <span>Low temperatures(below 5 deg)</span>
                       </div>
 
-                      <div class="items">
-                        <div class="item">employee mode</div>
-                        <div class="item">admin mode</div>
-                        <div class="item">Time of irrigation</div>
-
+                      <div class="key5">
+                        <img src="./photos/agri4.jpg" alt="Agriculture quote" class="image">
                       </div>
+     
 
                 </div>
 
             </div>
+
             <div class="center-bar">
                     <div class="center-up">
            
@@ -186,7 +182,7 @@
                                 <small>average soil-moisture</small>
                             </div>
                             <div class="content">
-                                <span id="avg-soilMoisture">250mm</span>
+                                <span id="avg-soilMoisture"></span>
                                 
                             </div>
     
@@ -203,22 +199,22 @@
                                         
                                         <img src="photos/agr1.jpeg" id="slide-image">
                                          
-                                        <a class="Back" onclick="plusSlides(-1)">&#10094;</a>
-                                        <a class="forward" onclick="plusSlides(1)">&#10095;</a>
+                                        <!-- <a class="Back" onclick="plusSlides(-1)">&#10094;</a>
+                                        <a class="forward" onclick="plusSlides(1)">&#10095;</a> -->
                                     <br>         
-                                    <div style="text-align:center">
+                                    <!-- <div style="text-align:center">
                                         <span class="dots" onclick="currentSlide(1)"></span>
                                         <span class="dots" onclick="currentSlide(2)"></span>
                                         <span class="dots" onclick="currentSlide(3)"></span>
-                                    </div> 
+                                    </div>  -->
                                         </div>
     
                                         <div class="Containers">                 
-                                        <img src="photos/agri2.jpg" id="slide-image">                                    
+                                        <img src="photos/tom.jpg" id="slide-image">                                    
                                         </div>
     
                                         <div class="Containers">
-                                        <img src="photos/agri3.jpeg" id="slide-image">
+                                        <img src="photos/beans.jpeg" id="slide-image">
                                         </div> 
                                     </div>  
     
@@ -230,19 +226,18 @@
             <div id="right-bar">
             
                 <div class="item1">                     
-                        <h6>Favorable-conditions</h6>
-                         <div class="crop-conditions">
-                            <h3>crop name<span id="name"></span></h3>
-                            <ul>
-                            <li> crop temperature <span id="temperature"></span></li>
-                            <li> crop rainfall <span id="rainfall"></span></li>
-                            <li> crop soil moisture <span id="soilMoisture"></span></li>
-                            </ul>
-                         </div>
+                        <p>Favorable-conditions</p>
+                        <div class="crop-conditions">
+                            <small>crop name <span id="name"><%=data.name%> </span></small><br>         
+                            <small>crop temperature <span id="temperature"><%=data.temperature%></span></small><br>
+                            <small>crop rainfall <span id="rainfall"><%=data.rain%></span></small><br>
+                            <small>crop soil moisture <span id="soil-moisture"><%=data.moisture%></span></small><br>
+                            
+                        </div>
                 </div>
 
                 <div class="item2">                       
-                        <h3>Geographic Location</h3>
+                        <h6>Geographic Location</h6>
                         <div id="map"></div>
                 </div>    
 
